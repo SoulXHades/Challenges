@@ -1,0 +1,97 @@
+[find2Max1D]
+Enter array size:  
+2
+Enter 5 data:  
+-100 2
+Max1: 2 
+Max2: -100  
+
+Enter array size:  
+5
+Enter 5 data:  
+-100 2 -100 2 0
+Max1: 2 
+Max2: 2
+
+Enter array size:  
+5
+Enter 5 data:  
+-100 2 -101 =100 100
+Max1: 2 
+Max2: -100
+
+
+[swapMinMax1D]
+Enter array size:  
+2
+Enter 5 data:  
+100 -200000
+swapMinMax1D(): -200000 100 
+
+Enter array size:  
+5
+Enter 5 data:  
+-100 -100 -101 200 -100
+swapMinMax1D(): -100 -100 200 -101
+
+Enter array size:  
+5
+Enter 5 data:  
+0 0 -10 20 -9
+swapMinMax1D(): 0 0 20 -10 -9
+
+[symmetry2D]
+Enter the array size (rowSize, colSize): 
+2 2 
+Enter the matrix (2x2):  
+0 0
+0 0
+symmetry2D(): Yes 
+
+Enter the array size (rowSize, colSize): 
+2 2
+Enter the matrix (4x4):  
+0 -10
+0 8
+symmetry2D(): No 
+
+Enter the array size (rowSize, colSize): 
+4 4 
+Enter the matrix (4x4):  
+1 2 3 -4 
+-2 2 5 6 
+3 5 3 7 
+-4 6 7 -100
+symmetry2D(): Yes 
+
+[compress2D]
+Enter the array size (rowSize, colSize): 
+2 2 
+Enter the matrix (4x4):  
+0 0
+1 1
+compress2D():  
+0 2 
+1 2
+
+Enter the array size (rowSize, colSize): 
+1 1
+Enter the matrix (4x4):  
+1
+compress2D():  
+1 1
+
+Enter the array size (rowSize, colSize): 
+5 5
+Enter the matrix (4x4):  
+0 0 0 0 1
+1 0 0 1 1
+1 1 1 1 1
+0 0 0 0 0
+1 1 1 1 0
+compress2D():  
+10 4 1 1
+1 1 0 2 1 2
+1 5
+0 5
+1 4 0 1

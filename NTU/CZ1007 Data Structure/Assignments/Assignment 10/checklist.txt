@@ -1,0 +1,205 @@
+1. Question 1
+
+           5                  5
+         2   1            NULL  1
+
+Please input your choice(1/2/3/0): 1
+Creating tree1:
+Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
+Enter an integer value for the root: 5
+Enter an integer value for the Left child of 5: 2
+Enter an integer value for the Right child of 5: 1
+Enter an integer value for the Left child of 2: a
+Enter an integer value for the Right child of 2: a
+Enter an integer value for the Left child of 1: a
+Enter an integer value for the Right child of 1: a
+The resulting tree1 is: 2 5 1
+Please input your choice(1/2/3/0): 2
+Creating tree2:
+Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
+Enter an integer value for the root: 5
+Enter an integer value for the Left child of 5: a
+Enter an integer value for the Right child of 5: 1
+Enter an integer value for the Left child of 1: a
+Enter an integer value for the Right child of 1: a
+The resulting tree2 is: 5 1
+Please input your choice(1/2/3/0): 3
+Both trees are different.
+
+
+
+           5                              5
+         2   1                        2        1
+       4  NULL NULL 1               4   4    1   2
+
+
+
+
+
+Enter an integer value for the root: 5
+Enter an integer value for the Left child of 5: 2
+Enter an integer value for the Right child of 5: 1
+Enter an integer value for the Left child of 2: 4
+Enter an integer value for the Right child of 2: a
+Enter an integer value for the Left child of 4: a
+Enter an integer value for the Right child of 4: a
+Enter an integer value for the Left child of 1: a
+Enter an integer value for the Right child of 1: 1
+Enter an integer value for the Left child of 1: a
+Enter an integer value for the Right child of 1: a
+The resulting tree1 is: 4 1 2 5 1 4 2 5 1 1
+Please input your choice(1/2/3/0): 2
+Creating tree2:
+Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
+Enter an integer value for the root: 5
+Enter an integer value for the Left child of 5: 2
+Enter an integer value for the Right child of 5: 1
+Enter an integer value for the Left child of 2: 4
+Enter an integer value for the Right child of 2: 4
+Enter an integer value for the Left child of 4: a
+Enter an integer value for the Right child of 4: a
+Enter an integer value for the Left child of 4: a
+Enter an integer value for the Right child of 4: a
+Enter an integer value for the Left child of 1: 1
+Enter an integer value for the Right child of 1: 2
+Enter an integer value for the Left child of 1: a
+Enter an integer value for the Right child of 1: a
+Enter an integer value for the Left child of 2: a
+Enter an integer value for the Right child of 2: a
+The resulting tree2 is: 4 2 4 5 1 1 2
+Please input your choice(1/2/3/0): 3
+Both trees are different.
+Please input your choice(1/2/3/0): 3
+Both trees are structurally identical.
+Please input your choice(1/2/3/0): 0
+
+
+2. maxHeight
+
+        4
+     1      4
+   2   3  a   a
+  a a 4 a
+     a a
+
+Please input your choice(1/2/0):
+1
+Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
+Enter an integer value for the root:
+4
+Enter an integer value for the Left child of 4:
+1
+Enter an integer value for the Right child of 4:
+4
+Enter an integer value for the Left child of 1:
+2
+Enter an integer value for the Right child of 1:
+3
+Enter an integer value for the Left child of 2:
+a
+Enter an integer value for the Right child of 2:
+a
+Enter an integer value for the Left child of 3:
+4
+Enter an integer value for the Right child of 3:
+a
+Enter an integer value for the Left child of 4:
+a
+Enter an integer value for the Right child of 4:
+a
+Enter an integer value for the Left child of 4:
+a
+Enter an integer value for the Right child of 4:
+a
+The resulting binary tree is: 2 1 4 3 4 4
+
+Please input your choice(1/2/0):
+2
+The maximum height of the binary tree is: 3
+
+Please input your choice(1/2/0):
+2
+The maximum height of the binary tree is: -1
+
+Please input your choice(1/2/0):
+
+3. countOneChildNodes
+
+                50
+           30          70
+        20     40    60   a
+       a  a   35 a  a a
+             a  1
+
+Please input your choice(1/2/0):
+1
+Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
+Enter an integer value for the root:
+50
+Enter an integer value for the Left child of 50:
+30
+Enter an integer value for the Right child of 50:
+70
+Enter an integer value for the Left child of 30:
+20
+Enter an integer value for the Right child of 30:
+40
+Enter an integer value for the Left child of 20:
+a
+Enter an integer value for the Right child of 20:
+a
+Enter an integer value for the Left child of 40:
+35
+Enter an integer value for the Right child of 40:
+a
+Enter an integer value for the Left child of 35:
+a
+Enter an integer value for the Right child of 35:
+1
+Enter an integer value for the Left child of 1:
+a
+Enter an integer value for the Right child of 1:
+a
+Enter an integer value for the Left child of 70:
+60
+Enter an integer value for the Right child of 70:
+a
+Enter an integer value for the Left child of 60:
+a
+Enter an integer value for the Right child of 60:
+a
+The resulting binary tree is: 20 30 35 1 40 50 60 70
+Please input your choice(1/2/0):
+2
+The number of nodes that have exactly one child node is: 3.
+
+Please input your choice(1/2/0):
+1
+Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
+Enter an integer value for the root:
+50
+Enter an integer value for the Left child of 50:
+a
+Enter an integer value for the Right child of 50:
+a
+The resulting binary tree is: 50
+Please input your choice(1/2/0):
+2
+The number of nodes that have exactly one child node is: 0.
+Please input your choice(1/2/0):
+1
+Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
+Enter an integer value for the root:
+50
+Enter an integer value for the Left child of 50:
+30
+Enter an integer value for the Right child of 50:
+a
+Enter an integer value for the Left child of 30:
+a
+Enter an integer value for the Right child of 30:
+a
+The resulting binary tree is: 30 50
+Please input your choice(1/2/0):
+2
+The number of nodes that have exactly one child node is: 1.

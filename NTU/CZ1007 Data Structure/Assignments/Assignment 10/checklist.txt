@@ -1,5 +1,4 @@
 1. similar
-
            5                  5
          2   1            NULL  1
 
@@ -173,6 +172,9 @@ Please input your choice(1/2/0):
 2
 The number of nodes that have exactly one child node is: 3.
 
+	50
+       a  a
+
 Please input your choice(1/2/0):
 1
 Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.
@@ -186,6 +188,10 @@ The resulting binary tree is: 50
 Please input your choice(1/2/0):
 2
 The number of nodes that have exactly one child node is: 0.
+
+	50
+      30  a
+
 Please input your choice(1/2/0):
 1
 Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.

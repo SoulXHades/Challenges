@@ -149,7 +149,7 @@ int isBST(BTNode *node, int min, int max) // the item stored in node has to be s
     if(node->item < min || node->item > max)
         return 0;
 
-    return isBST(node->left, -1000000, node->item) & isBST(node->right, node->item ,1000000);
+    return isBST(node->left, min, node->item) & isBST(node->right, node->item, max);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-1. Question 1
+1. similar
 
            5                  5
          2   1            NULL  1
@@ -47,7 +47,7 @@ Enter an integer value for the Left child of 1: a
 Enter an integer value for the Right child of 1: 1
 Enter an integer value for the Left child of 1: a
 Enter an integer value for the Right child of 1: a
-The resulting tree1 is: 4 1 2 5 1 4 2 5 1 1
+The resulting tree1 is: 4 1 2 5 1 1
 Please input your choice(1/2/3/0): 2
 Creating tree2:
 Input an integer that you want to add to the binary tree. Any Alpha value will be treated as NULL.

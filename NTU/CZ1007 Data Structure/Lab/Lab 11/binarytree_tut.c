@@ -200,20 +200,22 @@ void printSmallerValues(BTNode *node, int m){
 int smallestValue(BTNode *node) {
 	int l, r;
 
-	//true when is the leaf node
-	if(node->left == NULL && node->right == NULL)
+	if(node == NULL)
+        return;
+    else if(node->left == NULL && node->right == NULL)
         return node->item;
 
-	if(node->left != NULL)
-        l = smallestValue(node->left);
-
-    if(node->right != NULL)
-        r = smallestValue(node->right);
+    if(node->left == NULL)
+        r = l = smallestValue(node->right);
+    else if(node->right == NULL)
+        l = r =  smallestValue(node->left);
     else
-        r = l;  //when left have node but right do not have node
+    {
+        l = smallestValue(node->left);
+        r = smallestValue(node->right);
+    }
 
-    //return the smaller value
-    return l < r ? ((l < node->item) ? l : node->item) : r;
+    return l > r ? (r < node->item ? r : node->item) : (l < node->item ? l : node->item);
 
 }
 

@@ -45,8 +45,8 @@ A sample program run is given below:
 
 ----jGRASP exec: java CircleApp
 
-\==== Circle Computation =====
-\|1. Create a new circle     |
+==== Circle Computation =====
+|1. Create a new circle     |
 |2. Print Area              |
 |3. Print circumference     |
 |4. Quit                    |

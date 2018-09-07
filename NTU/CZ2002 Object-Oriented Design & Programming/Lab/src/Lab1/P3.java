@@ -112,7 +112,7 @@ public class P3 {
 			try
 			{
 				//Get the ending value
-				System.out.print("Input the ending US$: ");
+				System.out.print("Input the increment: ");
 				increment = sc.nextInt();
 			}
 			catch(InputMismatchException e)

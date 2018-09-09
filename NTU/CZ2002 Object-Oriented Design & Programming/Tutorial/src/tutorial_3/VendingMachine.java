@@ -43,10 +43,6 @@ public class VendingMachine {
 	//check the change and print the change on screen
 	public void checkChange(double amount, double drinkCost)
 	{
-		//print the amount inserted so far
-		System.out.printf("Coins inserted: %.2f\n", amount);
-		
-		if(amount >= drinkCost)
 			System.out.printf("Change: $ %.2f\n", (amount - drinkCost));	//if no change, it will be 0.00
 	}
 	

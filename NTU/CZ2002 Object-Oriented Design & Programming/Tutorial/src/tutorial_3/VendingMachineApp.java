@@ -32,9 +32,12 @@ public class VendingMachineApp {
 	    	//get money from user
 	    	amountInserted += vm1.insertCoins(drinkCost);
 	    	
-	    	//prints the amount inserted and the change
-		    vm1.checkChange(amountInserted, drinkCost);
+	    	//print the amount inserted so far
+			System.out.printf("Coins inserted: %.2f\n", amountInserted);
 	    }
+	    
+	    //prints the amount inserted and the change
+	    vm1.checkChange(amountInserted, drinkCost);
 	    
 	    //exiting message
 	    vm1.printReceipt();

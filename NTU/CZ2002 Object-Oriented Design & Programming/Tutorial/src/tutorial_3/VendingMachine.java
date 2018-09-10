@@ -43,7 +43,8 @@ public class VendingMachine {
 	//check the change and print the change on screen
 	public void checkChange(double amount, double drinkCost)
 	{
-			System.out.printf("Change: $ %.2f\n", (amount - drinkCost));	//if no change, it will be 0.00
+		//if no change, it will be 0.00
+		System.out.printf("Change: $ %.2f\n", (amount - drinkCost));
 	}
 	
 	//print the receipt and collect the drink

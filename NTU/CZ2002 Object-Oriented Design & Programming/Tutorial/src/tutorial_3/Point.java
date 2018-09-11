@@ -8,8 +8,8 @@ public class Point {
 	//constructor
 	public Point()
 	{
-		this.x = 1;
-		this.y = 1;
+		this.x = 0;
+		this.y = 0;
 	}
 	
 	public Point(int x, int y)

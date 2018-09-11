@@ -1,46 +1,88 @@
+/*
+1. Design a program to implement a vending machine for buying drinks. Write a class
+VendingMachine that has the following methods:
+
+public class VendingMachine
+{
+// constructor
+public VendingMachine() {}
+// get the drink selection, and return the cost of the drink
+public double selectDrink() {...}
+// insert the coins and returns the amount inserted
+public double insertCoins(double drinkCost) {...}
+// check the change and print the change on screen
+public void checkChange(double amount, double drinkCost) {...}
+// print the receipt and collect the drink
+public void printReceipt(){...}
+}
+
+
+The UML class diagram for the VendingMachine class is given below:
+
+VendingMachine
++ VendingMachine()
++ selectDrink(): double
++ insertCoins(drinkCost: double): double
++ checkChange(amount: double, drinkCost: double): void
++ printReceipt(): void
+
+
+Write an application class VendingMachineApp to test the class
+VendingMachine. The program allows users to select the drink to buy, and
+accept coins inserted by the user to pay for the drink. The program will also print
+the receipt for user to collect the drink.
+
+a) Discuss the design of the VendingMachine class and how it can be improved.
+b) What will be a relevant class to relate to the VendingMachine class?
+c) Suggest how the application can be re-designed to involve the class in (b)?
+d) [Optional] Implement your design.
+
+
+A sample program run is given below:
+
+====== Vending Machine ======
+|1. Buy Beer ($3.00) 		|
+|2. Buy Coke ($1.00) 		|
+|3. Buy Green Tea ($5.00) |
+|============================
+Please enter selection:
+1
+Please insert coins:
+========== Coins Input ===========
+|Enter 'Q' for ten cents input |
+|Enter 'T' for twenty cents input|
+|Enter 'F' for fifty cents input |
+|Enter 'N' for a dollar input |
+==================================
+Q
+Coins inserted: 0.10
+T
+Coins inserted: 0.30
+F
+Coins inserted: 0.80
+N
+Coins inserted: 1.80
+N
+Coins inserted: 2.80
+N
+Coins inserted: 3.80
+Change: $ 0.80
+Please collect your drink
+Thank You !!
+
+*SOLUTIONS BELOW IS IMPLEMENTING A BETTER WAY*
+*/
+
 package tutorial_3;
 
 public class VendingMachineApp {
 
 	public static void main(String[] args) {
-		double drinkCost, amountInserted = 0.0;
-		
+		//initialize
 		VendingMachine vm1 = new VendingMachine();
 		
-		//print menu
-		System.out.println("====== Vending Machine ======");
-		System.out.println("|1. Buy Beer ($3.00)        |");
-		System.out.println("|2. Buy Coke ($1.00)        |");
-		System.out.println("|3. Buy Green Tea ($5.00)   |");
-		System.out.println("|============================");
-		
-		//get user's choice of drink and return the cost
-	    System.out.println("Please enter selection:");
-	    drinkCost = vm1.selectDrink();
-	    
-	    System.out.println("Please insert coins:");
-	    System.out.println("========== Coins Input ===========");
-	    System.out.println("Enter 'Q' for ten cents input    |");
-	    System.out.println("Enter 'T' for twenty cents input |");
-	    System.out.println("Enter 'F' for fifty cebts input  |");
-	    System.out.println("Enter 'N' for a dollar input     |");
-	    System.out.println("==================================");
-	    
-	    //loop until user fully pays the cost of the drink
-	    while(amountInserted < drinkCost)
-	    {
-	    	//get money from user
-	    	amountInserted += vm1.insertCoins(drinkCost);
-	    	
-	    	//print the amount inserted so far
-			System.out.printf("Coins inserted: %.2f\n", amountInserted);
-	    }
-	    
-	    //prints the amount inserted and the change
-	    vm1.checkChange(amountInserted, drinkCost);
-	    
-	    //exiting message
-	    vm1.printReceipt();
+		//execute the content
+		vm1.start();
 
 	}
 

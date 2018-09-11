@@ -33,5 +33,11 @@ public class Circle extends Point{
 	{
 		return Math.pow(this.radius, 2) * PI;
 	}
+	
+	//return info and coordinates
+	public String toString()
+	{
+		return "Cylinder of radius" + radius + "at point [ " + Integer.toString(super.getX()) + ", " + Integer.toString(super.getY()) + " ]";
+	}
 
 }

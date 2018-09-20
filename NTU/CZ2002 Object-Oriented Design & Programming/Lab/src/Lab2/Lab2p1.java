@@ -303,8 +303,8 @@ public class Lab2p1 {
 	//question 3.7
 	public static long extractOddDigits(long n)
 	{
-		int oddDigits=0;
-		int counter=1;
+		long oddDigits=0;
+		long counter=1;
 		
 		while(n > 0)
 		{

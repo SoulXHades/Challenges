@@ -308,12 +308,15 @@ public class Lab2p1 {
 		
 		while(n > 0)
 		{
+			//check if the most left hand digit is an odd digit
 			if((n%10) % 2 != 0)
 			{
+				//get that digit and add into the oddDigits
 				oddDigits += (counter * (n%10));
 				counter *= 10;
 			}
 			
+			//remove that digit
 			n /= 10;
 		}
 		

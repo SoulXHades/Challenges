@@ -28,18 +28,12 @@ public class Plane {
 	{
 		PlaneSeat[] tempSeat = new PlaneSeat[12];
 		PlaneSeat tempSeat1;
-		int tempCus_id;
 		
 		//copy the content of the original Seat to tempSeat
 		for(int i=0; i<numOfSeats; i++)
 		{
-			//copy SeatId
-			tempSeat[i] = new PlaneSeat(this.seat[i].getSeatID());
-			tempCus_id = this.seat[i].getCustomerID();
-			
-			//copy Customer's Id if is not 0
-			if(tempCus_id != 0)
-				tempSeat[i].assign(tempCus_id);
+			//copy key (address)
+			tempSeat[i] = seat[i];
 		}
 		
 		//sort them by customer id in ascending order using insertion sort algorithm

@@ -1,0 +1,4 @@
+The UML Sequence Diagram in Figure Q (the picture) shows the objects interaction of the
+“Cash Check” scenario flow. Using the details depicted in the diagram, write the
+preliminary codes of the JAVA classes for all the participating objects shown. You
+may make appropriate assumptions on the method parameters and return types.

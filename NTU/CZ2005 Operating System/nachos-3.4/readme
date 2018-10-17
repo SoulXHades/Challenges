@@ -1,0 +1,33 @@
+There are four lab sessions.
+
+Lab session 1: CPU scheduling
+Assessment: oral+report
+working directory: lab1
+manual file: lab1/MANUAL
+type 'make' to compile
+type './nachos' or './nachos -d' (display debugging messages) to run
+type 'make clean' to remove executables
+
+Lab session 2: Process synchronization
+Assessment: demo + report
+working directory: port
+manual file: port/MANUAL
+type 'make' to compile
+type './nachos' or './nachos -d' (display debugging messages) to run
+type 'make clean' to remove executables
+
+Lab session 3: Virtual memory
+Assessment: demo + report
+working directory: vm
+manual file: vm/MANUAL
+type 'make' to compile
+type './nachos' or './nachos -d' (display debugging messages) to run
+type 'make clean' to remove executables
+
+Lab session 4: Assessments
+
+ASSESSMENT
+The assessment of the lab component for this course consists of two parts. The first part is the written report plus oral examination on the question and exercises set for Experiment 1. The second part is the written report plus demonstration of the lab assignments set in Experiment 2 and Experiment 3.  
+
+NOTE
+You are required to attend all the 4 laboratory sessions.  Your attendance will be marked and this is very important.

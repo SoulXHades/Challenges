@@ -1,0 +1,84 @@
+
+EXPERIMENT 2
+
+PROCESS SYNCRONIZATION
+
+
+1.	OBJECTIVES
+
+After completing this lab, you will be able to:
+* Understand how to synchronize processes. 
+* Know message passing primitives like send and receive for process synchronization.
+* Know how to use semaphores to implement message passing primitives.
+
+2.	LABORATORY
+
+Computing Laboratory II (N4-B2b-04).
+
+3.	EQUIPMENT
+
+Pentium IV PC with Nachos 3.4. 
+
+4.	MODE OF WORKING
+
+You should be working alone. No group effort. 
+
+5.	ASSESSMENT
+
+The assessment of this lab will be based on your written report plus demonstration.  Please arrange with your lab supervisor on your demonstration if you can't demonstrate your program in the lab session.
+
+Your assignment will be assessed according to the following criteria:
+* Originality of the program.
+* Documentation - this includes internal and external documentation.
+* Readability of the program.
+* Demonstration on the workability of the program.
+
+6. 	SUBMISSION PROCEDURE
+
+You must submit your lab assignment to Computing Lab II before the due date. Late submission will be penalized and submission more than one week later will not be accepted. The deadline for submission is TWO weeks after you attend lab session 2.  Hence each lab group has different deadline.  You can check out your deadline from the lab technicians. 
+
+Your hard-copy submission must include a cover page, clearly showing the code and name of the course (i.e., SC303/CPE205/CSC205 Operating Systems), your name, and lab group number.
+
+7. 	PROBLEM STATEMENT
+
+In this lab, you are required to implement synchronous send and receive of a message (also known as rendezvous) using C++. First of all, a Port class has been created for you (refer to port.h and port.cc). You are required to complete methods Port::Send(int message) and Port::Receive(int *message). The Send method atomically waits until the Receive method is called on the same Port; and then copies the message into the Receive buffer. Once the copy is made, both can return. Similarly, the Receive method waits until the Send method is called, at which point the copy is made, and both can return. (Hint: this is equivalent to a 0-length bounded buffer!) 
+
+Your solutions should even work if there are multiple senders and receivers on the same port. Therefore, you are required to write a test program to test whether send/receive operations are working properly. Messages are sent on the same port, which allow senders and receivers to synchronize with each other. Your test program porttest.cc should test the following different conditions to prove synchronization has been achieved (Single/Multiple sender/receiver on the same port) correctly:
+
+ PortTest1 - Sender1,   Receive1
+ PortTest2 - Receive1,  Sender1
+ PortTest3 - Sender1,   Sender2,   Receiver1, Receiver2
+ PortTest4 - Sender1,   Receiver1, Sender2,   Receiver2
+ PortTest5 - Sender1,   Receiver1, Receiver2, Sender2
+ PortTest6 - Receiver1, Receiver2, Sender1,   Sender2
+ PortTest7 - Receiver1, Sender1,   Receiver2, Sender2
+ PortTest8 - Receiver1, Sender1,   Sender2,   Receiver2
+
+Suggested data structure:
+	 
+* Send and Receive methods are embedded in a class called "Port".
+* Besides send and receive methods, a constructor and a destructor are also used for initialization and clean-up.
+* A message is just an integer.
+* A private integer, buffer, is used to hold the message being passed.
+* One lock per port is used for mutual exclusion on the send/receive operations.
+* Three variables are used for synchronization:
+* cSender - put sender to wait if no receiver.
+* cReceiver - put receiver to wait if no sender.
+* cBuffer - put sender to wait if buffer is used by another sender who is sleeping.
+* Two integers are used to keep track of numbers of senders and receivers: 
+* nSender - the number of senders
+* nReceiver - the number of receivers
+
+8. EXERCISES
+
+1.Change working directory to port by typing cd ~/nachos-3.4/port.
+
+2.Complete the send and receive methods in file port.cc, and methods from PortTest1 to PortTest8 in file porttest.cc. You may need to reference the following files: port.h, threads/synch.h, threads/synch.cc, threads/thread.h, and threads/thread.cc. Note: You must run one test case at a time and should not run all eight test cases together.
+
+3.Compile Nachos by typing make. If you see "ln -sf arch/intel-i386-linux/bin/nachos nachos” at the end of the compiling output, your compilation is successful. If you encounter any anomalies, type make clean to remove all object and executable files and then type make again for a clean compilation.
+
+4.Execute Nachos by typing ./nachos. Write down the output from porttest.cc (including all test cases from PortTest1 to PortTest8), and verify whether your send and receive solutions synchronize on the same port correctly.
+
+9. Report
+
+It is recommended that your report should include analysis of the test program output, which verifies whether your send and receive solutions synchronize on the same port 	based on the rendezvous paradigm.

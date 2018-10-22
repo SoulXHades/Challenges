@@ -2,15 +2,15 @@ package tutorial_6;
 
 //control in BoundaryControlEntity
 public class Bank {
-	//initialization
-	private Check c = new Check();
-	private CheckingAccount ca = new CheckingAccount();
+	//declaration
+	//no need to initialize as it should be in constructor
+	private CheckingAccount ca;
 	
 	//method call from another class
 	//cash a check control
-	public float cashCheck(Object theCheck)
+	public float cashCheck(Check theCheck)
 	{
-		float amount =  c.getAmount();
+		float amount =  theCheck.getAmount();
 		float balance = ca.getBalance();
 		
 		if(balance < amount)
@@ -22,7 +22,7 @@ public class Bank {
 			return -1;
 		}
 		
-		int checkNumber = c.getCheckNo();
+		int checkNumber = theCheck.getCheckNo();
 		
 		ca.addDebitTransaction(checkNumber, amount);
 		ca.storePhotoOfCheck(theCheck);
@@ -30,7 +30,7 @@ public class Bank {
 		return amount;
 	}
 	
-	private void returnCheck(Object theCheck)
+	private void returnCheck(Check theCheck)
 	{
 		System.out.println("Returning the check");
 	}

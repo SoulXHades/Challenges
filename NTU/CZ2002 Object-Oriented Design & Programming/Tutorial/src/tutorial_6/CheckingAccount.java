@@ -19,7 +19,7 @@ public class CheckingAccount {
 		totalInsufficientFund += insufficientFundFee;
 	}
 	
-	protected void noteReturnedCheck(Object theCheck)
+	protected void noteReturnedCheck(Check theCheck)
 	{
 		//***record returned of check***
 	}
@@ -30,7 +30,7 @@ public class CheckingAccount {
 		//***add to transaction history***
 	}
 	
-	protected void storePhotoOfCheck(Object theCheck)
+	protected void storePhotoOfCheck(Check theCheck)
 	{
 		//***store a photocopy of the check***
 	}

@@ -1,0 +1,40 @@
+The file Sorting.java contains the Sorting class (in attachment). This class implements both the
+selection sort and the insertion sort algorithms for sorting any array of Comparable objects in
+ascending order. In this exercise, you will use the Sorting class to sort several different types of objects.
+(For details on the Compareble interface, refer to Java API doc
+http://docs.oracle.com/javase/7/docs/api/)
+
+1. The file Numbers.java (in attachment) reads in an array of integers, invokes the selection sort
+algorithm to sort them, and then prints the sorted array. Save Sorting.java and Numbers.java to your
+directory. Numbers.java won't compile in its current form. Study it to see if you can figure out why.
+
+2. Try to compile Numbers.java and see what the error message is. The problem involves the difference
+between primitive data and objects. Change the program so it will work correctly (note: you don't need
+to make many changes - the autoboxing feature of Java 1.5 (or higher) will take care of most
+conversions from int to Integer). You are to do research in the internet and understand better
+autoboxing.
+
+3. Write a program Strings.java, similar to Numbers.java, that reads in an array of String objects and sorts
+them. You may just copy and edit Numbers.java.
+
+4. Modify the insertionSort algorithm so that it sorts in descending order rather than ascending order.
+Change Numbers.java and Strings.java to call insertionSort rather than selectionSort. Run both to make
+sure the sorting is correct.
+
+5. The class diagram on the right defines the SalePerson class that represents a sale person. 
+The sale person has a first name, last name, and a total number of sales (an int).
+	-> The toString method will return the name of the sale person and total sales in the formal :
+		<lastName> , <firstName> : <totalSales>
+	-> The equals method will check whether the first and last 
+		names of Object are the same as the current sale person.
+	-> The compareTo method make the comparison based on total
+		sales; that is, return a negative number if the executing
+		object has total sales less than the other object and return a
+		positive number if the sales are greater. Use the name of the
+		sales person’s last name to break a tie (in ascending alphabetical order).
+	-> Create and Write the SalePerson class 
+
+6. The file WeeklySales.java (in attachment) contains a driver for testing the compareTo method and the
+sorting . Compile and run it. Make sure your compareTo method is correct. The sales staff should be
+listed in the order of sales from most to least. If the sale staffs have the same number of sales, they
+are listed in ascending alphabetical order of their last names.

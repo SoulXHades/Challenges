@@ -45,7 +45,7 @@ public class SalePerson implements Comparable<Object>{
 			
 			//check if it's a tie
 			if((totalSales - sp.getTotalSales()) == 0)
-				return sp.getLastName().compareTo(lastName);	//in ascending alphabetical order
+				return sp.getLastName().compareTo(lastName);	//in ascending alphabetical order using String's own compareTo()
 			else
 				return totalSales - sp.getTotalSales();
 		}

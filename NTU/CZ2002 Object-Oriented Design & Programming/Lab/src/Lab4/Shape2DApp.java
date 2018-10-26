@@ -89,31 +89,35 @@ public class Shape2DApp {
 			System.out.println("Input a choice:");
 			choice = sc.nextInt();
 			
+			//get out of the menu (loop)
+			if(choice == -1)
+				break;
+			
 			if(shapeList[choice] instanceof Square)
 			{
 				Square s1 = (Square)shapeList[choice];
 				
-				System.out.printf(s1.getShapeType() + " of length %f is %f\n", s1.getLength(), s1.Area());
+				System.out.printf(s1.getShapeType() + " of length %f area is %f\n", s1.getLength(), s1.Area());
 			}
 			else if(shapeList[choice] instanceof Rectangle)
 			{
 				Rectangle r1 = (Rectangle)shapeList[choice];
 				
-				System.out.printf(r1.getShapeType() + " of length %f and breadth is %f\n", r1.getLength(), r1.getBreadth(), r1.Area());
+				System.out.printf(r1.getShapeType() + " of length %f and breadth area is %f\n", r1.getLength(), r1.getBreadth(), r1.Area());
 			}
 			else if(shapeList[choice] instanceof Circle)
 			{
 				Circle c1 = (Circle)shapeList[choice];
 				
-				System.out.printf(c1.getShapeType() + " of radius %f is %f\n", c1.getRadius(), c1.Area());
+				System.out.printf(c1.getShapeType() + " of radius %f area is %f\n", c1.getRadius(), c1.Area());
 			}
 			else if(shapeList[choice] instanceof Triangle)
 			{
 				Triangle t1 = (Triangle)shapeList[choice];
 				
-				System.out.printf(t1.getShapeType() + " of base %f and height %f is %f\n", t1.getBase(), t1.getHeight(), t1.Area());
+				System.out.printf(t1.getShapeType() + " of base %f and height %f area is %f\n", t1.getBase(), t1.getHeight(), t1.Area());
 			}
-		}while(choice != -1);
+		}while(true);
 
 	}
 

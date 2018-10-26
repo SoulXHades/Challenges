@@ -19,7 +19,7 @@ public class Sphere extends Circle{
 	}
 	
 	//get volume of sphere
-	public double Volumne()
+	public double Volume()
 	{
 		return (double)4/3 * PI * Math.pow(super.getRadius(), 3);
 	}

@@ -16,6 +16,11 @@ public class Cubiod extends Rectangle{
 		this.height = height;
 	}
 	
+	public double getHeight()
+	{
+		return this.height;
+	}
+	
 	public double Area()
 	{
 		return (super.Area() * 2) + (2 * super.getLength() * this.height) + (2 * super.getBreadth() * this.height);

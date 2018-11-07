@@ -53,10 +53,6 @@ int VpnToPhyPage(int vpn)
 	for(int frameNum=0; frameNum<NumPhysPages; frameNum++)
 	{
 		printf("IPT[%d] = %d,%d,%d,%d\n", frameNum, memoryTable[frameNum].pid, memoryTable[frameNum].vPage, memoryTable[frameNum].lastUsed, memoryTable[frameNum].valid);
-	}
-
-	for(int frameNum=0; frameNum<NumPhysPages; frameNum++)
-	{
 		//check if is in Page Table and if it's for the current process
 		if(memoryTable[frameNum].valid && memoryTable[frameNum].pid == currentThread->pid && memoryTable[frameNum].vPage == vpn)
 		{

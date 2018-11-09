@@ -1,0 +1,155 @@
+3.1 Define a Class and Object Instantiation : Create the Animal class
+1. Write the following Animal class and save it in your own directory as Animal.cpp
+
+#include <iostream>
+#include <string>
+using namespace std ;
+enum COLOR { Green, Blue, White, Black, Brown } ;
+class Animal {
+	public :
+		Animal() : _name("unknown") {
+			cout << "constructing Animal object "<< _name << endl ;
+		}
+		~Animal() {
+			cout << "destructing Animal object "<< _name << endl ;
+		}
+		void speak() const {
+			cout << "Animal speaks "<< endl ;
+		}
+		void move() const { }
+	private :
+		string _name;
+		COLOR _color ;
+};
+
+int main() {
+	Animal a;
+	a.speak();
+	cout << "Program exiting …. " << endl;
+	return 0;
+}
+
+
+
+a) Build the code into an executable, eg OODP.exe
+b) In order to view the destructor at work, you will need to run the executable in a window
+console.
+c) Click on the Windows Start at the left bottom corner and select “Run…”
+d) Type “cmd” to open a command prompt console.
+e) Change directory to your working directory where the .exe is by using cd command.
+	Eg, > cd E:\tmp\OODP\Debug
+	This will change the directory to E drive with path \tmp\OODP\Debug
+f) Type the executable name without the ‘.exe’ to run your program.
+g) Note and understand the sequences where the Animal constructor and destructor are called.
+
+
+2. Overload the Animal constructor by writing another constructor which will initialize the name and
+color of the Animal object.
+a) The signature of the constructor is Animal(string n, COLOR c)
+b) Print the name and color in the constructor.
+c) Change or modify the main function to use the new constructor and provide required
+parameter values.
+d) Do step 1(a)-(g) again
+
+
+
+
+3.2 Inheritance : Create Animal subclasses
+1. In the same Animal.cpp file, write a Mammal class to inherit from the Animal class.
+a. Hint Mammal: public Animal
+b. Create a public method void eat() const for the Mammal Class
+void eat() const {
+cout << "Mammal eat " << endl ;
+}
+c. Create a constructor which will initialize the name and color of the Mammal object.
+[ you should make use of the Animal constructor ]
+d. Create a destructor for the Mammal class.
+e. Create a Mammal object in main and called the speak method.
+f. Build and run the application
+[Note : to pause the console display, you can add the code system(“PAUSE”); OR cin.get() ; ]
+
+2. In the same Animal.cpp file, write a Dog class to inherit from the Mammal class.
+a. Create an attribute string owner for the Dog Class
+b. Create a constructor which will initialize the name, color and owner of the Dog object.
+[ you should make use of the Mammal constructor ]
+c. Create a destructor for the Dog class.
+d. Create a Dog object in main and called the speak method.
+e. Build and run the application
+[ you should also observe the sequences where the Animal, Mammal and Dog constructor and
+destructor are called ]
+
+3. Override the speak method for Dog to “Woof”
+a. Put the “virtual” keyword in the appropriate class and method and write the code for Dog
+object to speak appropriately.
+b. Build and run the application.
+c. Is the output as you have expected?
+
+4. Pure Method
+a. declare the move function in the Animal class as a pure method
+using the “virtual” keyword and “= 0”
+b. Build the application
+c. Understand and resolve the error/s you encountered.
+[ You should not make Mammal class as abstract ]
+d. Add the code in main for Dog object to called the move method.
+
+
+
+
+3.3 Polymorphism : Build a Zoo
+1. Using the abstract class
+a. The Animal class is now an abstract class
+b. Abstract class cannot be instantiated but it can be used as a reference type
+c. Add the following code in main
+Animal *animalPtr = new Dog("Lassie", White, "Andy");
+d. Use the animalPtr to call the speak and move methods.
+[ remember to also delete animalPtr before exiting the program]
+e. Build and run the application.
+
+2. Without virtual
+a. In the Animal class, delete the virtual keyword from the speak method.
+b. Build and run the application.
+c. Note the difference in output as compared to (1).
+d. Build and run the application.
+e. Undo the deleting of the virtual keyword in (a).
+
+3. virtual function magic
+a. Add the below codes in the main function
+
+	Dog dogi("Lassie", White, "Andy");
+	Mammal *aniPtr = &dogi;
+	Mammal &aniRef = dogi;
+	Mammal aniVal = dogi;
+
+	aniPtr->speak();
+	aniRef.speak();
+	aniVal.speak();
+
+
+b. Build and run the application.
+c. Is the output as you have expected?
+
+4. Build a Zoo
+a. In this task, you will write your own code.
+b. The requirements are :
+	- Create 2 more subclasses Cat and Lion inheriting from Mammal class
+		[ you should add in the relevant methods – constructors & destructor ]
+	- Override the move and speak methods to perform a simple printout of the mammal,
+		eg Cat meow, Lion Roar.
+	- Create a program to ask user to select the animals from the list
+		Eg display :
+ 			Select the animal to send to Zoo :
+			(1) Dog (2) Cat (3) Lion (4) Move all animals (5) Quit
+	- You should use an array to store the selected Mammal object.
+	- When “Move all animals” is selected, you should traverse the array and make the
+		animals move, speak and eat.
+	- Will your code still work if it is an array of Animal objects ?
+
+5. Header and Implementation files
+a. Separate the declaration code and Implementation code – create a header file/s (.h) for the
+declaration code and implementation file/s (.cpp) for the implementation code.
+Eg, animal.h for Animal and Mammal class, childAnimal.h for Dog, Cat, etc, subclasses and a
+ZooMain.cpp for implementation. Make sure you #include the header file/s accordingly.
+b. You may also selectively put simple implementation code in the header file.
+c. Build and execute the application to make sure all is still well as in (4).
+d. You will submit this version.
+[ Note : You may want to google ‘include guard” if you faced compilation error/s due to #include ]

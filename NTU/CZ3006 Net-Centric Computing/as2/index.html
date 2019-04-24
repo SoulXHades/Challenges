@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CZ3006 Webpage Project</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+	<div class="container">
+		<div class="welcome">
+			<p></p>
+			<center><font color="white" size="10"><b>Welcome to FruitsOnline</b></font></center>
+		</div>
+		<form action="order.php" id="orderForm" method="post">
+			<div class="usernameContainer">
+				<label for="usernameID" font-size="25px">Username:</label>
+				<input id="usernameID" name="userName" type="text" placeholder="username" required>
+			</div>
+			<table class="table" text-align="center">
+				<thread>
+					<tr>
+						<th><font size="5">Fruit</font></th>
+						<th><font size="5">Price</font></th>
+						<th><font size="5">Quantity</font></th>
+					</tr>
+				</thread>
+				<tbody>
+					<tr>
+						<!-- All HTML are objects so need 'this' -->
+						<td><img src="images/apple.png" height="40" width="40"/><font size="5"> Apple</font></td>
+						<td><font size="5">69 cents each</font></td>
+						<td><input id="appleQty" name="apple_Qty" class="quantityTextBox" type="text" placeholder="0"
+							onchange="changesToValue(this.id)"></td>
+					</tr>
+					<tr>
+						<td><img src="images/orange.png" height="40" width="40"/><font size="5"> Orange</font></td>
+						<td><font size="5">59 cents each</font></td>
+						<td><input id="orangeQty" name="orange_Qty" class="quantityTextBox" type="text" placeholder="0"
+							onchange="changesToValue(this.id)"></td>
+					</tr>
+					<tr>
+						<td><img src="images/banana.png" height="40" width="40"/><font size="5"> Banana</font></td>
+						<td><font size="5">39 cents each</font></td>
+						<td><input id="bananaQty" name="banana_Qty" class="quantityTextBox" type="text" placeholder="0"
+							onchange="changesToValue(this.id)"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="totalCostContainer">
+				<label for="totalCost">Total Cost:</label>
+				<input id="totalCost" name="total_Cost" class="totalCostTextBox" type="text" value="$0.00" onfocus="blur()" onblur="focus()">
+			</div>
+			<div class="paymentContainer">
+				<table class="paymentTable">
+					<colgroup>
+						<col width="250px">
+						<col width="250px">
+						<col width="250px">
+					</colgroup>
+					<tr>
+						<th><img src="images/visa.jpg" height="50" width="75"></th>
+						<th><img src="images/mastercard.jpg" height="50" width="75"></th>
+						<th><img src="images/discover.jpg" height="50" width="75"></th>
+					</tr>
+					<tr>
+						<td><label for="visaID" font-size="25px">Visa</label><br>
+							<input id="visaID" name="payment" class="paymentOption" type="radio" value="Visa" checked>
+						</td>
+						<td>
+							<label for="mastercardID" font-size="25px">MasterCard</label><br>
+							<input id="mastercardID" name="payment" class="paymentOption" type="radio" value="Mastercard">
+						</td>
+						<td>
+							<label for="discoverID" font-size="25px">Discover</label><br>
+							<input id="discoverID" name="payment" class="paymentOption" type="radio" value="Discover">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-top: 25px;">
+				<input id="submitBtnID" type="submit" class="btn btn-success" value="Submit Button" disabled="disabled">
+			</div>
+		</form>
+	</div>
+</body>
+<!-- All Javascript after body section -->
+<script type="text/javascript">
+	function calculateTotalCost()
+	{
+		//sum up the data
+		var totalPrice = 0;
+
+		//only sum up the price if the quantity of that fruit is not ""
+		//sum up in whole number before dividing by 100 to prevent Rounding Error
+		if(document.getElementById("appleQty").value != "")
+			totalPrice = parseInt(document.getElementById("appleQty").value) * 69;
+		if(document.getElementById("orangeQty").value != "")
+			totalPrice = totalPrice + parseInt(document.getElementById("orangeQty").value) * 59;
+		if(document.getElementById("bananaQty").value != "")
+			totalPrice = totalPrice + parseInt(document.getElementById("bananaQty").value) * 39;
+
+		//set the total cost to the display of total cost textbox
+		document.getElementById("totalCost").value = "$" + (totalPrice/100).toString();
+
+		if(document.getElementById("totalCost").value == "$0")
+			document.getElementById("totalCost").value = "$0.00";
+	}
+
+	function changesToValue(identity)
+	{
+		//validate latest input
+		if(validations(identity))
+			calculateTotalCost();	//calculate total and display if validation passes
+		
+		enableSubmitBtn();
+	}
+
+	function enableSubmitBtn()
+	{
+		//for enabling and disabling of submit button
+		if(document.getElementById("totalCost").value == "$0.00" || document.getElementById("totalCost").value == "NaN")
+			document.getElementById("submitBtnID").setAttribute("disabled", "disabled");
+		else
+			document.getElementById("submitBtnID").removeAttribute("disabled");	//only when user keyed in username
+	}
+
+	//works for "" as well
+	function isInt(n)
+	{
+		return n%1 === 0;
+	}
+
+	//reset all "" in quantity textbox to "0"
+	function resetValue()
+	{
+		//reset quantity textbox value to 0 if is ""
+		document.getElementById("appleQty").value == "";
+		document.getElementById("orangeQty").value = "";
+		document.getElementById("bananaQty").value = "";
+	}
+
+	function validations(identity)
+	{
+		//check if it is a number, NaN = Not a Number, or if it is empty
+		if(!isNaN(document.getElementById(identity).value) || document.getElementById(identity).value == "")
+		{
+			if(isInt(document.getElementById(identity).value))
+			{
+				if(parseInt(document.getElementById(identity).value) > -1 || document.getElementById(identity).value == "")
+					return true;	//return when user input is correct
+				else
+					alert("Please input 0 or amount larger than 0.")	//inform user to input again
+			}
+			else
+				alert("Please input whole numbers only.")	//inform user to input again
+		}
+		else
+			alert("Please input numbers only.");	//inform user to input again
+
+		//reset to empty again
+		document.getElementById(identity).value = "";
+		document.getElementById("totalCost").value = "NaN";	//set total cost textbox to "NaN"
+
+		return false;
+	}
+</script>
+</html>

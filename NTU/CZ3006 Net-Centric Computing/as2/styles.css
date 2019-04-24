@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+body {
+	text-align: center;
+	background-image: url("images/fruits.jpg");
+	height:80%; 
+
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.btn-success{
+	height: 50px;
+}
+
+.form-control{
+	margin-left: 0;
+	max-width: 10%
+}
+
+.paymentTable{
+	margin-top: 160px; 
+	margin-left: 175px; 
+	margin-right: 175px;
+}
+
+.quantityTextBox{
+	text-align: center;
+}
+
+.totalCostContainer{
+	float: right;
+	margin-right: 130px;
+	font-size: 25px;
+}
+
+.totalCostTextBox{
+	height: 70px;
+	max-width: 206px;
+	text-align: center;
+	margin-left: 20px;
+}
+
+.usernameContainer{
+	float: none;
+	margin-right: 75px;
+	margin-bottom: 25px;
+}
+
+.welcome{
+	margin-top: 100px;
+	margin-bottom: 80px;
+}

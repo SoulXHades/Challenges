@@ -1,0 +1,3 @@
+Total number of apples: 4
+Total number of oranges: 5
+Total number of bananas: 1

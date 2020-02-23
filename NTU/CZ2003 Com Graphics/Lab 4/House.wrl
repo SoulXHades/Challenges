@@ -1,0 +1,204 @@
+#VRML V2.0 utf8
+
+# The following EXTERNPROTO definitins remain the same for all FVRML scenes.
+
+EXTERNPROTO FGeometry [
+	exposedField SFString definition
+	exposedField MFFloat parameters
+	exposedField MFInt32 resolution
+	exposedField SFVec3f bboxCenter
+	exposedField SFVec3f bboxSize
+	exposedField SFString type
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FGeometry"
+EXTERNPROTO FMaterial [
+	exposedField SFString diffuseColor
+	exposedField SFString type
+	exposedField MFColor patternColor
+	exposedField MFFloat patternKey
+	exposedField SFString ambientIntensity
+	exposedField SFString emissiveColor
+	exposedField SFString shininess
+	exposedField SFString specularColor
+	exposedField SFString transparency
+	exposedField MFFloat parameters
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FMaterial"
+EXTERNPROTO FTexture3D [
+	exposedField SFString definition
+	exposedField SFString type
+	exposedField MFFloat parameters
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FTexture3D"
+EXTERNPROTO FAppearance [
+	exposedField SFNode	material
+	exposedField SFNode	texture
+	exposedField SFNode	textureTransform
+	exposedField SFNode	texture3D
+	exposedField MFNode	parents
+	eventIn	SFBool refresh
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FAppearance"
+EXTERNPROTO FShape [
+	exposedField SFNode	geometry
+	exposedField SFNode	appearance
+	exposedField SFString polygonizer
+	exposedField MFNode	parents
+	exposedField SFTime	startTime
+	exposedField SFTime stopTime
+    exposedField SFTime cycleInterval
+    exposedField SFBool	loop
+	exposedField SFBool	enabled
+	eventOut SFTime	cycleTime
+	eventIn SFFloat set_fraction
+	field SFInt32 frames
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FShape"
+EXTERNPROTO FTransform [
+	exposedField SFString operation
+	exposedField SFString type
+	exposedField SFString polygonizer
+	exposedField MFFloat parameters
+	exposedField SFString center
+	exposedField SFString rotation
+	exposedField SFString scale
+	exposedField SFString scaleOrientation
+	exposedField SFString translation
+	exposedField MFNode children
+	exposedField MFNode	parents
+	eventIn	SFBool refresh
+    exposedField SFVec2f timeSpan
+	exposedField SFTime	startTime
+	exposedField SFTime stopTime
+    exposedField SFTime cycleInterval
+    exposedField SFBool	loop
+	exposedField SFBool	enabled
+	eventOut SFTime	cycleTime
+	eventIn SFFloat set_fraction
+	field SFInt32 frames
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FTransform"
+
+Background {skyColor 0 0 1}
+
+# External VRML object "coordinate system" is included in the scene
+Inline {url "http://www3.ntu.edu.sg/home/assourin/FVRML/CoordinateAxes.wrl"}
+
+
+FShape {
+geometry FGeometry {
+
+# Function script defining the CSG solid. 
+# Change to some other formulae to see how the solid geometry changes 
+# based on the parameters domain and the sampling resolution defined below
+	definition "function frep(x,y,z,t){
+				outerbox_x = min(x+1, 1-x);
+				outerbox_y = min(y,2-y);
+				outerbox_z = min(z+1, 1-z);
+				outerbox_xy = min(outerbox_x,outerbox_y);
+				outerbox = min(outerbox_xy, outerbox_z);
+   
+				interbox_x = min(x+0.9, 0.9-x);
+				interbox_y = min(y-0.1, 2-y);
+				interbox_z = min(z+0.9, 0.9-z);
+				interbox_xy = min(interbox_x, interbox_y);
+				interbox = min(interbox_xy, interbox_z);
+
+				walls_basee = min(outerbox, -interbox);
+
+				door_hole_x = min(x+0.25, 0.25-x);
+				door_hole_y = min(1-y, y-0.1);
+				door_hole_z = z-0.9;
+				door_hole_xy = min(door_hole_x, door_hole_y);
+				door_hole = min(door_hole_xy, door_hole_z);
+
+				body_dh = min(walls_basee, -door_hole);
+
+				win_l1_x = min(x+0.75, -0.6-x);
+				win_l1_y = min(y-1.35, 1.5-y);
+				win_l1_z = door_hole_z;
+				win_l1_xy = min(win_l1_x, win_l1_y);
+				win_l1 = min(win_l1_xy, win_l1_z);
+
+				win_l2_x = min(x+0.5, -0.35-x);
+				win_l2_y = win_l1_y;
+				win_l2_z = door_hole_z;
+				win_l2_xy = min(win_l2_x, win_l2_y);
+				win_l2 = min(win_l2_xy, win_l2_z);
+
+				win_l3_x = win_l1_x;
+				win_l3_y = min(y-1.1, 1.25-y);
+				win_l3_z = door_hole_z;
+				win_l3_xy = min(win_l3_x, win_l3_y);
+				win_l3 = min(win_l3_xy, win_l3_z);
+
+				win_l4_x = win_l2_x;
+				win_l4_y = win_l3_y;
+				win_l4_z = door_hole_z;
+				win_l4_xy = min(win_l4_x, win_l4_y);
+				win_l4 = min(win_l4_xy, win_l4_z);
+
+				win_r1_x = min(x-0.6, 0.75-x);
+				win_r1_y = win_l1_y;
+				win_r1_z = door_hole_z;
+				win_r1_xy = min(win_r1_x, win_r1_y);
+				win_r1 = min(win_r1_xy, win_r1_z);
+
+				win_r2_x = min(x-0.35, 0.5-x);
+				win_r2_y = win_l1_y;
+				win_r2_z = door_hole_z;
+				win_r2_xy = min(win_r2_x, win_r2_y);
+				win_r2 = min(win_r2_xy, win_r2_z);
+
+				win_r3_x = win_r1_x;
+				win_r3_y = win_l3_y;
+				win_r3_z = door_hole_z;
+				win_r3_xy = min(win_r3_x, win_r3_y);
+				win_r3 = min(win_r3_xy, win_r3_z);
+
+				win_r4_x = win_r2_x;
+				win_r4_y = win_l3_y;
+				win_r4_z = door_hole_z;
+				win_r4_xy = min(win_r4_x, win_r4_y);
+				win_r4 = min(win_r4_xy, win_r4_z);
+
+				body_win_l1 = min(body_dh, -win_l1);
+				body_win_l2 = min(body_win_l1, -win_l2);
+				body_win_l3 = min(body_win_l2, -win_l3);
+				body_win_l4 = min(body_win_l3, -win_l4);
+				body_win_r1 = min(body_win_l4, -win_r1);
+				body_win_r2 = min(body_win_r1, -win_r2);
+				body_win_r3 = min(body_win_r2, -win_r3);
+				body_win_final = min(body_win_r3, -win_r4);
+
+				roof = min(min(((4-y)^2)-(x^2)-(z^2), 4-y), y-2);
+
+				body_roof= max(body_win_final,	roof);
+
+				chimney_holeless_x = min(x+0.75, -0.25-x);
+				chimney_holeless_y = min(y-3, 4-y);
+				chimney_holeless_z = min(z+0.25, 0.25-z);
+				chimney_holeless_xy = min(chimney_holeless_x, chimney_holeless_y);
+				chimney_holeless = min(chimney_holeless_xy, chimney_holeless_z);
+
+				body_chimney_holeless = max(body_roof, chimney_holeless);
+
+				body_chimney = min(body_chimney_holeless, -min((0.02-((x+0.5)^2)-(z^2)), y-1));
+
+				body_cloud1 = max(body_chimney,  1-((x+1.25)^2)-(((y-4.3)/0.25)^2)-((z/0.25)^2));
+
+				return body_cloud1; }"
+
+# Adjust the tight bounding box and an optimal resolution
+bboxCenter 0 0 0
+bboxSize 10 10 10
+resolution [150 150 150]
+
+ }     
+
+appearance FAppearance {
+material FMaterial { 
+# Variable color is defined for the CGS solid
+diffuseColor "r=1; g=abs(cos(0.245*pi*v+2.35)); b=abs(cos(0.245*pi*v+2.35));"
+   }    }
+}

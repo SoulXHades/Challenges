@@ -1,0 +1,12 @@
+mode 0
+definition "x = 3*u*cos(2*pi*w);
+			y = sin(4*pi*u)+2-4*v;
+			z = 3*u*sin(2*pi*w);"
+parameters 0 1 0 1 0 1
+resolution 6 6 6
+diffuseColor 1 1 1
+SpecularColor 0.4 0.1 0.3
+Transparency 0
+Shininess 1
+Timecycle 1
+Timerange 0 1

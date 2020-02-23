@@ -1,0 +1,12 @@
+mode 0
+definition "x=2*cos(u*pi/2);
+			y=1*sin(u*pi/2);
+			z=0;"
+parameters 0 4
+resolution 100
+diffuseColor 1 1 1
+SpecularColor 0.4 0.1 0.3
+Transparency 0
+Shininess 1
+Timecycle 1
+Timerange 0 1

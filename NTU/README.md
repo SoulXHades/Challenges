@@ -14,4 +14,5 @@ This folder contain solutions done by me in school. The full question is either 
 * CZ3004 Multi-disciplinary Project - AY19/20 Semester 2
 * CZ3005 Artificial Intelligence - AY19/20 Semester 2
 * CZ3006 Net-centric Computing - AY18/19 Semester 2
+* CZ3007 Compiler Techniques - AY20/21 Semester 1
 * CZ4069 Concept & Technique Malware Analysis - AY19/20 Semester 2

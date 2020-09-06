@@ -33,6 +33,7 @@ There is also a pseudo-token EOF indicating the end of input. The template code 
 The enum type Type in class Token contains one enum constant for every token type in PL/3007 as described above. Your lexer should return, for every token, an instance of class Token that has the correct token type and lexeme, together with the source position of the token. This is done by calling the constructor of the Token class. For example, when keyword “module” or identifier “average” is recognized by the lexer, the corresponding token may be created by calling the constructor Token():
 
 > new Token(MODULE, yyline, yycolumn, yytext()); 
+
 > new Token(ID, yyline, yycolumn, yytext());
 
 yyline and yycolumn together specify the text position of the token in the source file. yytext() gives the matched text.
@@ -47,22 +48,31 @@ You do not have to change anything in the usercode section. This section is copi
 
 In the options and declarations section, we see these options:
 > %public
+
 > %final
+
 > %class Lexer
+
 > %function nextToken 
+
 > %type Token
+
 > %unicode
+
 > %line
+
 > %column
 
 *%public* and *%final* make the generated class public and final. *%class Lexer* tells JFlex to give the generated class the name “Lexer” and to write the generated code to a file “Lexer.java”. *%function nextToken* causes the scanning method to get the name “nextToken”. *%type Token* causes the scanning method to be declared as returning values of the type “Token”. Actions in the specification can then return values of Token as tokens. *%unicode* defines the set of characters the scanner will work on. *%line* switches line counting on (the current line number can be accessed via the variable yyline) and *%column* switches column counting on (current column is accessed via yycolumn).
 
 The code included in *%{ ... %}* is copied verbatim into the generated lexer class source. Here you can declare member variables and functions that are used inside scanner actions. Fill in the code in the two methods
 > private Token token(Token.Type type)
+
 > private Token token(Token.Type type, String text)
 
 which can be called in the lexer rule actions to create a token without providing all 4 parameter values as in Section 3.2. For example, with these two methods, you may use
 > return token(MODULE);
+
 > return token(ID, yytext());
 
 in the lexer rule actions to return the two tokens respectively.

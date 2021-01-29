@@ -1,0 +1,164 @@
+// package the generated Java class lives in; no need to change this
+%package "parser";
+
+// name of the generated Java class; no need to change this
+%class "Parser";
+
+// no need to change this either
+%embed {:
+	// turn off automated error recovery
+	@Override
+	protected void recoverFromError(Symbol token, TokenStream in) throws java.io.IOException, Exception {
+		super.recoverFromError(new Symbol(0), in);
+	}
+:};
+
+// the list of all terminals; no need to change this
+%terminals MODULE, INT, VOID, IF, ELSE, WHILE, RETURN, BREAK, BOOLEAN, PUBLIC, TRUE, FALSE,
+           INT_LITERAL, STRING_LITERAL, ID, TYPE, IMPORT,
+           PLUS, MINUS, TIMES, DIV, MOD, EQEQ, NEQ, LEQ, GEQ, LT, GT,
+           LBRACKET, RPAREN, COMMA, RCURLY, LCURLY, SEMICOLON, RBRACKET, LPAREN, EQL;
+           
+// declaration of start symbol; no need to change this
+%goal Module;
+
+Module = MODULE ID LCURLY Imports Declarations RCURLY;
+
+Imports = Imports Import
+	| 
+	;
+			
+Import = IMPORT ID SEMICOLON;
+
+Declarations = Declarations Declaration
+	|
+	;
+				
+Declaration = FunctionDeclaration
+	| FieldDeclaration
+	| TypeDeclaration
+	;
+				
+FunctionDeclaration = Accessibility TypeName ID LPAREN ParameterList RPAREN LCURLY StatementList RCURLY;
+
+FieldDeclaration = Accessibility TypeName ID SEMICOLON;
+
+TypeDeclaration = Accessibility TYPE ID EQL STRING_LITERAL SEMICOLON;
+
+StatementList = Statement StatementList
+	|
+	;
+
+Accessibility = PUBLIC
+	|
+	;
+				
+TypeName = PrimitiveType
+	| ArrayType
+	| ID
+	;
+		   
+PrimitiveType = VOID
+	| BOOLEAN
+	| INT
+	;
+
+
+ArrayType = PrimitiveType LBRACKET RBRACKET
+	| ArrayType LBRACKET RBRACKET
+	| ID LBRACKET RBRACKET
+	;
+
+ParameterList = ParameterNonEmptyList
+	|
+	;
+
+ParameterNonEmptyList = ParameterNonEmptyList COMMA Parameter 
+	| Parameter
+	;
+
+Parameter = TypeName ID;
+
+Statement = TypeName ID SEMICOLON				// Local Variable Declaration
+	| LCURLY StatementList RCURLY				// Block of Statements
+	| IfStatement								// If Statement
+	| WHILE LPAREN Expression RPAREN Statement	// While Statement
+	| BREAK SEMICOLON							// Break Statement
+	| ReturnStatement							// Return Statement
+	| Expression SEMICOLON						// Expression Statement
+	;
+
+IfStatement = IF LPAREN Expression RPAREN Statement
+	| IF LPAREN Expression RPAREN Statement ELSE Statement	//Shift-Reduce Conflict
+	;
+
+ReturnStatement = RETURN Expression SEMICOLON
+	| RETURN SEMICOLON
+	;
+
+Expression = Assignment
+	| RHSExpression
+	;
+					
+Assignment = LHSExpression EQL Expression;
+
+LHSExpression = ID 
+              | ArrayAccess
+              ;
+
+ArrayAccess = ID LBRACKET Expression RBRACKET
+              | ArrayAccess LBRACKET Expression RBRACKET;
+
+RHSExpression = ArithmeticExpression 
+	| ArithmeticExpression ComparisonOperator ArithmeticExpression
+	;
+
+ComparisonOperator = EQEQ
+	| NEQ
+	| LT
+	| LEQ
+	| GT
+	| GEQ
+	;
+						
+ArithmeticExpression = ArithmeticExpression AdditiveOperator Term	
+	| Term
+	;
+						
+AdditiveOperator = PLUS
+	| MINUS
+	;
+
+Term = Term MultiplicativeOperator Factor	
+	| Factor
+	;
+						
+MultiplicativeOperator = TIMES
+	| DIV
+	| MOD
+	;
+							
+Factor = MINUS Factor 
+	| PrimaryExpression
+	;
+		
+PrimaryExpression = LHSExpression				// Left Hand Side Expression
+	| ID LPAREN ExpressionEmptyList RPAREN		// Function Call
+	| LBRACKET ExpressionNonEmptyList RBRACKET	// Array Expression
+	| STRING_LITERAL							// String Literal
+	| INT_LITERAL								// Integer Literal
+	| BooleanLiterals							// Boolean Literals
+	| LPAREN Expression RPAREN					// Parenthesis Expression
+	;
+
+BooleanLiterals = TRUE
+	| FALSE
+	;
+
+ExpressionEmptyList = ExpressionNonEmptyList
+	|
+	;
+
+ExpressionNonEmptyList = ExpressionNonEmptyList COMMA Expression 
+	| Expression
+	;

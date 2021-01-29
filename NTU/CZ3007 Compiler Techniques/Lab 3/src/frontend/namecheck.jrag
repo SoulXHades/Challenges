@@ -1,0 +1,157 @@
+import java.util.HashSet;
+import java.util.Set;
+
+/** Attributes for checking whether the program has any name or scope errors.
+ *  Most of the definitions are just traversal methods that recurse over the children. */
+aspect Namecheck {
+	public void Program.namecheck() {
+		// check for name clashes on modules
+		Set<String> module_names = new HashSet<String>();
+		for(Module module : getModules()) {
+			if(!module_names.add(module.getQualifiedName()))
+				error("Multiple modules with name " + module.getQualifiedName());
+			module.namecheck();
+		}
+	}
+	
+	public void Module.namecheck() {
+		// check for duplicate imports
+		Set<String> imports = new HashSet<String>();
+		for(Import imp : getImports()) {
+			imp.namecheck();
+			if(!imports.add(imp.getQualifiedName()))
+				error("Multiple imports of module " + imp.getQualifiedName());
+		}
+		
+		for(Declaration decl : getDeclarations())
+			decl.namecheck();
+	}
+	
+	inh Module Import.getModule();
+	public void Import.namecheck() {
+		if(resolve() == null)
+			error("Module cannot be resolved: " + getQualifiedName());
+		if(getQualifiedName().equals(getModule().getQualifiedName()))
+			error("Modules cannot import themselves.");
+	}
+	
+	public abstract void Declaration.namecheck();
+	
+	inh FunctionDeclaration FunctionDeclaration.lookupFunction(String name);
+	public void FunctionDeclaration.namecheck() {
+		if(lookupFunction(getName()) != this)
+			error("Multiple declarations for function " + getName());
+		
+		getReturnType().namecheck();
+		for(Parameter parm : getParameters())
+			parm.namecheck();
+		getBody().namecheck();
+	}
+	
+	public void FieldDeclaration.namecheck() {
+		getVarDecl().namecheck();
+	}
+
+	inh TypeDeclaration TypeDeclaration.lookupType(String name); 
+	public void TypeDeclaration.namecheck() {
+		if(lookupType(getName()) != this)
+			error("Multiple declarations for type " + getName());
+	}
+
+	inh VarDecl VarDecl.lookupVar(String name);
+	public void VarDecl.namecheck() {
+		getTypeName().namecheck();
+		
+		// check that there aren't two variables with the same name in the same scope
+		VarDecl decl = lookupVar(getName());
+		if(decl != null && decl != this && decl.getScope() == this.getScope())
+			error("Multiple declarations for " + getName() + " in same scope");
+	}
+	
+	public void TypeName.namecheck() {}
+	public void UserTypeName.namecheck() {
+		if(lookupType(getName()) == null)
+			error("Type " + getName() + " could not be resolved.");
+	}
+	
+	public abstract void Stmt.namecheck();
+	
+	public void Block.namecheck() {
+		for(Stmt stmt : getStmts())
+			stmt.namecheck();
+	}
+	
+	public void BreakStmt.namecheck() {
+		if(getEnclosingLoop() == null)
+			error("Break statement outside loop.");
+	}
+	
+	public void ExprStmt.namecheck() {
+		getExpr().namecheck();
+	}
+	
+	public void IfStmt.namecheck() {
+		getExpr().namecheck();
+		getThen().namecheck();
+		if(hasElse())
+			getElse().namecheck();
+	}
+	
+	public void ReturnStmt.namecheck() {
+		if(hasExpr())
+			getExpr().namecheck();
+	}
+	
+	public void VarDeclStmt.namecheck() {
+		getVarDecl().namecheck();
+	}
+	
+	public void WhileStmt.namecheck() {
+		getExpr().namecheck();
+		getBody().namecheck();
+	}
+	
+	public abstract void Expr.namecheck();
+	
+	public void VarName.namecheck() {
+		if(decl() == null)
+			error("Variable " + getName() + " cannot be resolved.");
+	}
+	
+	public void ArrayIndex.namecheck() {
+		getBase().namecheck();
+		getIndex().namecheck();
+	}
+	
+	public void Call.namecheck() {
+		getCallee().namecheck();
+		for(Expr argument : getArguments())
+			argument.namecheck();
+	}
+	
+	public void Assignment.namecheck() {
+		getLHS().namecheck();
+		getRHS().namecheck();
+	}
+	
+	public void BinaryExpr.namecheck() {
+		getLeft().namecheck();
+		getRight().namecheck();
+	}
+	
+	public void UnaryExpr.namecheck() {
+		getOperand().namecheck();
+	}
+	
+	public void Literal.namecheck() {}
+	
+	public void ArrayLiteral.namecheck() {
+		for(Expr element : getElements())
+			element.namecheck();
+	}
+
+	public void FunctionName.namecheck() {
+		if(decl() == null)
+			error("Function " + getName() + " cannot be resolved.");
+	}
+}

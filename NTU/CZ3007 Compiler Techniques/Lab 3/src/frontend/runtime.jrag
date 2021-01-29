@@ -1,0 +1,14 @@
+/** The runtime module. */
+aspect Runtime {
+	public static TypeName TypeName.forClass(Class<?> klass) {
+		String name = klass.getCanonicalName();
+		if("void".equals(name))
+			return new VoidTypeName();
+		else if("int".equals(name))
+			return new IntTypeName();
+		else if("boolean".equals(name))
+			return new BooleanTypeName();
+		else
+			return new JavaTypeName(name);
+	}
+}

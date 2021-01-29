@@ -1,0 +1,129 @@
+import java.util.Map;
+import java.util.HashMap;
+import java.lang.reflect.Modifier;
+
+/** Implementation of name lookup. */
+aspect names {
+	// qualified names for modules and import statements
+	syn lazy String Import.getQualifiedName() = getPackage().isEmpty() ? getName() : getPackage() + "." + getName();
+	syn lazy String Module.getQualifiedName() = getPackage().isEmpty() ? getName() : getPackage() + "." + getName();
+	
+	// variable lookup
+	syn lazy VarDecl VarName.decl() = lookupVar(getName());
+	
+	// block structured lookup
+	inh lazy VarDecl VarName.lookupVar(String name);
+	inh lazy VarDecl Block.lookupVar(String name);
+	inh lazy VarDecl FunctionDeclaration.lookupVar(String name);
+	
+	// handle local declarations
+	eq Block.getStmt(int j).lookupVar(String name) {
+		for(int i=0;i<j;++i)
+			if(getStmt(i) instanceof VarDeclStmt) {
+				VarDecl vd = ((VarDeclStmt)getStmt(i)).getVarDecl();
+				if(vd.getName().equals(name))
+					return vd;
+			}
+		return this.lookupVar(name);
+	}
+	
+	// handle parameter declarations
+	eq FunctionDeclaration.getChild().lookupVar(String name) {
+		for(Parameter parm : getParameters())
+			if(parm.getName().equals(name))
+				return parm;
+		return this.lookupVar(name);
+	}
+	
+	// handle field declarations
+	eq Module.getChild().lookupVar(String name) {
+		// first try local lookup
+		FieldDeclaration decl = lookupLocalField(name);
+		if(decl != null)
+			return decl.getVarDecl();
+		
+		// otherwise try lookup imported fields
+		for(Import imp : getImports()) {
+			decl = imp.resolve().lookupLocalField(name);
+			// import only if it is public
+			if(decl != null && decl.isPublic())
+				return decl.getVarDecl();
+		}
+		return null;
+	}
+	
+	// look up local field inside module
+	syn lazy FieldDeclaration Module.lookupLocalField(String name) {
+		for(Declaration decl : getDeclarations()) {
+			if(decl instanceof FieldDeclaration) {
+				VarDecl vd = ((FieldDeclaration)decl).getVarDecl();
+				if(vd.getName().equals(name))
+					return (FieldDeclaration)decl;
+			}
+		}
+		return null;
+	}
+	
+	// module lookup
+	syn lazy Module Program.resolveModule(String qualifiedName) {
+		for(Module module : getModules())
+			if(module.getQualifiedName().equals(qualifiedName))
+				return module;
+		return null;
+	}
+	
+	syn lazy Module Import.resolve() = getProgram().resolveModule(getQualifiedName());
+	
+	// type lookup
+	inh lazy TypeDeclaration UserTypeName.lookupType(String name);
+	
+	// lookup types in module
+	eq Module.getChild().lookupType(String name) {
+		TypeDeclaration tp = lookupLocalType(name);
+		if(tp != null)
+			return tp;
+		
+		for(Import imp : getImports()) {
+			tp = imp.resolve().lookupLocalType(name);
+			if(tp != null && tp.isPublic())
+				return tp;
+		}
+		return null;
+	}
+	
+	// lookup local types
+	syn lazy TypeDeclaration Module.lookupLocalType(String name) {
+		for(Declaration decl : getDeclarations())
+			if(decl instanceof TypeDeclaration && ((TypeDeclaration)decl).getName().equals(name))
+				return (TypeDeclaration)decl;
+		return null;
+	}
+
+	// function lookup
+	syn FunctionDeclaration FunctionName.decl() = lookupFunction(getName());
+	
+	inh lazy FunctionDeclaration FunctionName.lookupFunction(String name);
+	eq Module.getChild().lookupFunction(String name) {
+		FunctionDeclaration fn = lookupLocalFunction(name);
+		if(fn != null)
+			return fn;
+		
+		for(Import imp : getImports()) {
+			fn = imp.resolve().lookupLocalFunction(name);
+			if(fn != null && fn.isPublic())
+				return fn;
+		}
+		return null;
+	}
+	
+	syn lazy FunctionDeclaration Module.lookupLocalFunction(String name) {
+		for(Declaration decl : getDeclarations())
+			if(decl instanceof FunctionDeclaration && ((FunctionDeclaration)decl).getName().equals(name))
+				return (FunctionDeclaration)decl;
+		return null;
+	}
+	
+	syn lazy FunctionDeclaration Call.getCallTarget() = getCallee().decl();
+	
+	syn boolean Declaration.isPublic() = getAccessibility().getPublic();
+}

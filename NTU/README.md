@@ -8,6 +8,7 @@ This folder contain solutions done by me in school. The full question is either 
 * CZ1012 Engineering Mathematics II - AY17/18 Semester 2
 * CZ2001 Algorithms - AY18/19 Semester 1
 * CZ2002 Object-Oriented Design & Programming - AY18/19 Semester 1
+* CE2003 Digital Systems Design - AY20/21 Semester 2
 * CZ2003 Computer Graphics - AY18/19 Semester 2
 * CZ2005 Operating System - AY18/19 Semester 1
 * CZ3001 Advanced Computer Architecture - AY18/19 Semester 2

@@ -1,0 +1,8 @@
+<project name="PL/3007" default="parser" basedir=".">
+	<taskdef name="beaver" classname="beaver.comp.run.AntTask" classpath="lib/beaver-ant.jar"/>
+
+	<target name="parser">
+		<mkdir dir="gen/parser"/>
+	    <beaver file="src/frontend/parser.beaver" destdir="gen"/>
+	</target>
+</project>

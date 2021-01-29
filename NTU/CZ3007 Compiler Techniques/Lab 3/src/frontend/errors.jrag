@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+
+/** Utility attributes for error reporting. */
+aspect Errors {
+	/** Utility class for representing compiler errors. */
+	public class CompilerError {
+		private final String msg;
+		private final int line, column;
+		
+		public CompilerError(String msg, int line, int column) {
+			this.msg = msg;
+			this.line = line;
+			this.column = column;
+		}
+		
+		@Override
+		public String toString() {
+			return "Line " + line + ", column " + column + ": " + msg;
+		}
+	}
+
+	/** Compiler errors are stored in a list at the program root. */
+	private ArrayList<CompilerError> Program.errors = new ArrayList<CompilerError>();
+	
+	/** Enter a new error into the list. */
+	protected void Program.error(String msg, int line, int column) {
+		errors.add(new CompilerError(msg, line, column));
+	}
+	
+	/** Report an error from some node within the AST. */
+	public void ASTNode.error(String msg) {
+		getProgram().error(msg, getLine(getStart()), getColumn(getStart()));
+	}
+	
+	/** Provide access to the list of compiler errors. */
+	public Iterable<CompilerError> Program.getErrors() {
+		return errors;
+	}
+	
+	/** Check whether any errors have been reported. */
+	public boolean Program.hasErrors() {
+		return !errors.isEmpty();
+	}
+}

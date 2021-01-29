@@ -1,0 +1,31 @@
+/** Utility attributes for navigating the AST. */
+aspect ASTUtil {
+	// find the innermost enclosing while statement; return null if there isn't one
+	inh WhileStmt Stmt.getEnclosingLoop();
+	eq FunctionDeclaration.getChild().getEnclosingLoop() = null;
+	eq WhileStmt.getBody().getEnclosingLoop() = this;
+	
+	// find the AST's root node
+	protected Program ASTNode.getProgram() {
+		if(getParent() == null)
+			return null;
+		return getParent().getProgram();
+	}
+	protected Program Program.getProgram() {
+		return this;
+	}
+	
+	// common interface for scope-creating AST nodes
+	interface Scope {}
+	Module implements Scope;
+	Block implements Scope;
+	FunctionDeclaration implements Scope;
+	
+	// get the scope of a variable declaration
+	inh Scope VarDecl.getScope();
+	eq Scope.getChild().getScope() = this;
+
+	// get the module a function is declared in
+	inh Module FunctionDeclaration.getModule();
+	eq Module.getChild().getModule() = this;
+}

@@ -1,0 +1,76 @@
+Program ::= Module*;
+
+Module ::= <Package:String> <Name:String> Import* Declaration*;
+
+Import ::= <Package:String> <Name:String>;
+
+abstract Declaration ::= Accessibility;
+
+Accessibility ::= <Public:Boolean>;
+
+FunctionDeclaration : Declaration ::= ReturnType:TypeName <Name:String> Parameter* Body:Block;
+FieldDeclaration : Declaration ::= VarDecl;
+TypeDeclaration : Declaration ::= <Name:String> <JavaType:String>;
+
+VarDecl ::= TypeName <Name:String>;
+LocalVarDecl : VarDecl;
+Parameter : VarDecl;
+
+abstract TypeName;
+IntTypeName : TypeName;
+BooleanTypeName : TypeName;
+VoidTypeName : TypeName;
+ArrayTypeName : TypeName ::= ElementType:TypeName;
+UserTypeName : TypeName ::= <Name:String>;
+JavaTypeName : TypeName ::= <Name:String>;
+
+abstract Stmt;
+
+ExprStmt : Stmt ::= Expr;
+VarDeclStmt : Stmt ::= VarDecl;
+Block : Stmt ::= Stmt*;
+IfStmt : Stmt ::= Expr Then:Stmt [Else:Stmt];
+WhileStmt : Stmt ::= Expr Body:Stmt;
+ReturnStmt : Stmt ::= [Expr];
+BreakStmt : Stmt;
+
+abstract Expr;
+
+abstract LHSExpr : Expr;
+VarName : LHSExpr ::= <Name:String>;
+ArrayIndex : LHSExpr ::= Base:Expr Index:Expr;
+
+Call : Expr ::= Callee:FunctionName Argument:Expr*;
+Assignment : Expr ::= LHS:LHSExpr RHS:Expr;
+abstract BinaryExpr : Expr ::= Left:Expr Right:Expr;
+AddExpr : BinaryExpr;
+SubExpr : BinaryExpr;
+MulExpr : BinaryExpr;
+DivExpr : BinaryExpr;
+ModExpr : BinaryExpr;
+abstract UnaryExpr : Expr ::= Operand:Expr;
+NegExpr : UnaryExpr;
+
+abstract CompExpr : BinaryExpr;
+EqExpr : CompExpr;
+NeqExpr : CompExpr;
+abstract ArithCompExpr : CompExpr;
+LtExpr : ArithCompExpr;
+GtExpr : ArithCompExpr;
+LeqExpr : ArithCompExpr;
+GeqExpr : ArithCompExpr; 
+
+abstract Literal : Expr;
+StringLiteral : Literal ::= <Value:String>;
+IntLiteral : Literal ::= <Value:Integer>;
+BooleanLiteral : Literal ::= <Value:Boolean>;
+ArrayLiteral : Literal ::= Element:Expr*;
+
+FunctionName ::= <Name:String>;
+
+abstract TypeDescriptor;
+IntType : TypeDescriptor;
+BooleanType : TypeDescriptor;
+VoidType : TypeDescriptor;
+ArrayType : TypeDescriptor ::= ElementType:TypeDescriptor;
+JavaType : TypeDescriptor ::= <Name:String>;

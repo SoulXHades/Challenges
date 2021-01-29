@@ -1,0 +1,191 @@
+/** Type checking. */
+aspect Typecheck {
+	// some convenience attributes
+	syn boolean TypeDescriptor.isArrayType() = false;
+	eq ArrayType.isArrayType() = true;
+	
+	syn boolean TypeDescriptor.isBoolean() = false;
+	eq BooleanType.isBoolean() = true;
+	
+	syn boolean TypeDescriptor.isNumeric() = false;
+	eq IntType.isNumeric() = true;
+	
+	syn boolean TypeDescriptor.isVoid() = false;
+	eq VoidType.isVoid() = true;
+	
+	public void Program.typecheck() {
+		for(Module module : getModules())
+			module.typecheck();
+	}
+	
+	public void Module.typecheck() {
+		for(Declaration decl : getDeclarations())
+			decl.typecheck();
+	}
+	
+	public void Declaration.typecheck() {}
+	
+	public void FunctionDeclaration.typecheck() {
+		getReturnType().typecheck();
+		for(Parameter parm : getParameters())
+			parm.typecheck();
+		getBody().typecheck();
+	}
+	
+	public void FieldDeclaration.typecheck() {
+		getVarDecl().typecheck();
+	}
+	
+	// check that no variable is declared to be of type 'void'
+	public void VarDecl.typecheck() {
+		getTypeName().typecheck();
+		if(getTypeName().getDescriptor().isVoid())
+			error("Cannot declare variable of type void.");
+	}
+	
+	public void Stmt.typecheck() {}
+	
+	public void VarDeclStmt.typecheck() {
+		getVarDecl().typecheck();
+	}
+	
+	public void Block.typecheck() {
+		for(Stmt stmt : getStmts())
+			stmt.typecheck();
+	}
+	
+	public void ExprStmt.typecheck() {
+		getExpr().typecheck();
+	}
+	
+	public void IfStmt.typecheck() {
+		getExpr().typecheck();
+		getThen().typecheck();
+		if(hasElse())
+			getElse().typecheck();
+		
+		// check that if condition is 'boolean'
+		if(!getExpr().type().isBoolean())
+			error("If condition is not of type boolean.");
+	}
+	
+	inh FunctionDeclaration Stmt.getFunction();
+	eq FunctionDeclaration.getChild().getFunction() = this;
+	
+	// check that return statement returns expression of right type
+	public void ReturnStmt.typecheck() {
+		if(!hasExpr()) {
+			if (!getFunction().getReturnType().getDescriptor().isVoid())
+				error("Return expression missing.");  
+		} else  {
+			getExpr().typecheck();
+			if(getExpr().type() != getFunction().getReturnType().getDescriptor())
+				error("Return statement returns expression of wrong type.");     
+		}
+	}
+	
+	// check that loop condition is not of type void
+	public void WhileStmt.typecheck() {
+		getExpr().typecheck();
+		getBody().typecheck();
+		
+		if(!getExpr().type().isBoolean())
+	
+		error("Loop condition is not of type boolean.");
+	}
+	
+	public abstract void Expr.typecheck();
+	
+	public void VarName.typecheck() {
+	}
+	
+	// check that base expression is array, and index expression is integer
+	public void ArrayIndex.typecheck() {
+		getBase().typecheck();
+		getIndex().typecheck();
+		
+		if(!getBase().type().isArrayType())
+			error("Base expression of array index should be of array type.");
+		if(!getIndex().type().isNumeric())
+			error("Index expression of array index should be of integer type.");
+	}
+	
+	// typecheck function call
+	public void Call.typecheck() {
+		FunctionDeclaration callee = getCallTarget();
+		for(int i=0;i<getNumArgument(); i++) 
+			getArgument(i).typecheck();
+		if (getNumArgument() != callee.getNumParameter()) {
+			error("Number of arguments (" + getNumArgument() + ") and number of " +
+					"parameters (" + callee.getNumParameter() + ") do not match."); 
+		} else {
+			for(int i=0;i<getNumArgument(); i++) 
+				if(getArgument(i).type() != callee.getParameter(i).type())
+					error("The " + i + "th argument has the wrong type.");
+		}
+	}
+	
+	// check assignment compatibility
+	public void Assignment.typecheck() {
+		getLHS().typecheck();
+		getRHS().typecheck();
+		if(getLHS().type() != getRHS().type())
+			error("The two sides of the assignment have different types.");
+	}
+	
+	// check that operands of binary expression are numeric
+	public void BinaryExpr.typecheck() {
+		getLeft().typecheck();
+		getRight().typecheck();
+		if(!getLeft().type().isNumeric() || !getRight().type().isNumeric())
+			error("Both operands of a binary arithmetic operator must have numeric type.");
+	}
+	
+	// check types of comparison operands
+	public void CompExpr.typecheck() {
+		getLeft().typecheck();
+		getRight().typecheck();
+		if(getLeft().type() != getRight().type())
+			error("Both operands of a comparison operator must be of the same type.");
+		if(getLeft().type().isVoid())
+			error("Operands in comparison may not be of type void.");
+	}
+	
+	public void ArithCompExpr.typecheck() {
+		getLeft().typecheck();
+		getRight().typecheck();
+		if(!getLeft().type().isNumeric())
+			error("Operands of arithmetic comparison must be numeric.");
+		if(!getRight().type().isNumeric())
+			error("Operands of arithmetic comparison must be numeric.");
+
+	}
+	
+	public void UnaryExpr.typecheck() {
+		getOperand().typecheck();
+		if(!getOperand().type().isNumeric())
+			error("The operand of a unary arithmetic operator must have numeric type.");
+	}
+	
+	public void Literal.typecheck() {}
+	
+	public void ArrayLiteral.typecheck() {
+		if(getNumElement() == 0) {
+			error("Array literals must contain at least one element.");
+		} else {
+			if(getElement(0).type().isVoid())
+				error("Array literal elements may not be of type void.");
+			for(int i=0;i<getNumElement();++i) {
+				getElement(i).typecheck();
+				if(i > 0 && getElement(i).type() != getElement(0).type())  /* one dimensional array assumed  */
+					error("Every element in an array literal must have the same type.");
+			}
+		}
+	}
+	
+	public void TypeName.typecheck() {}
+	public void ArrayTypeName.typecheck() {
+		if(getElementType().getDescriptor().isVoid())
+			error("Component type of array cannot be void.");
+	}
+}

@@ -1,0 +1,13 @@
+<project name="Mobila" default="gen" basedir=".">
+	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="lib/jflex.jar"/>
+
+	<target name="lexer">
+		<jflex file="src/frontend/lexer.flex" outdir="gen/lexer" nobak="yes"/>
+	</target>
+
+	<target name="gen" depends="lexer"/>
+	
+	<target name="clean">
+		<delete dir="gen"/>
+	</target>
+</project>

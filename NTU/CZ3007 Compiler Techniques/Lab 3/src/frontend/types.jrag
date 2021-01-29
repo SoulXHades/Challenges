@@ -1,0 +1,53 @@
+/** Type inference. */
+aspect types {
+	/** Singleton instances of types int, boolean and void. */
+	public static final IntType TypeDescriptor.INT = new IntType();
+	public static final BooleanType TypeDescriptor.BOOLEAN = new BooleanType();
+	public static final VoidType TypeDescriptor.VOID = new VoidType();
+	
+	/** Lazily create array type for an existing type. */
+	syn lazy ArrayType TypeDescriptor.arrayType() = new ArrayType(this);
+
+	/** Type descriptors for Java types. */
+	private static final HashMap<String, TypeDescriptor> TypeDescriptor.javaTypeDescriptors = new HashMap<String, TypeDescriptor>();
+	public static final TypeDescriptor TypeDescriptor.forJavaType(String name) {
+		TypeDescriptor desc = javaTypeDescriptors.get(name);
+		if(desc == null)
+			javaTypeDescriptors.put(name, desc = new JavaType(name));
+		return desc;
+	}
+
+	/** Determine type descriptor for type name. */
+	syn lazy TypeDescriptor TypeName.getDescriptor();
+	eq IntTypeName.getDescriptor() = TypeDescriptor.INT;
+	eq BooleanTypeName.getDescriptor() = TypeDescriptor.BOOLEAN;
+	eq VoidTypeName.getDescriptor() = TypeDescriptor.VOID;
+	eq ArrayTypeName.getDescriptor() {
+		TypeDescriptor desc = getElementType().getDescriptor();
+		return desc == null ? null : desc.arrayType();
+	}
+	eq UserTypeName.getDescriptor() {
+		TypeDeclaration decl = lookupType(getName());
+		return decl == null ? null : TypeDescriptor.forJavaType(decl.getJavaType());
+	}
+	eq JavaTypeName.getDescriptor() = TypeDescriptor.forJavaType(getName());
+	
+	/** Type inference for parameters. */
+	syn TypeDescriptor Parameter.type() = getTypeName().getDescriptor();
+	
+	/** Type inference for expressions. */
+	syn lazy TypeDescriptor Expr.type();
+	
+	eq VarName.type() = decl().getTypeName().getDescriptor();
+	eq ArrayIndex.type() = ((ArrayType)getBase().type()).getElementType();
+	
+	eq Call.type() = getCallTarget().getReturnType().getDescriptor();
+	eq Assignment.type() = getLHS().type();
+	eq BinaryExpr.type() = TypeDescriptor.INT;
+	eq CompExpr.type() = TypeDescriptor.BOOLEAN;
+	eq NegExpr.type() = TypeDescriptor.INT;
+	eq StringLiteral.type() = TypeDescriptor.forJavaType("java.lang.String");
+	eq IntLiteral.type() = TypeDescriptor.INT;
+	eq BooleanLiteral.type() = TypeDescriptor.BOOLEAN;
+	eq ArrayLiteral.type() = getElement(0).type().arrayType();
+}

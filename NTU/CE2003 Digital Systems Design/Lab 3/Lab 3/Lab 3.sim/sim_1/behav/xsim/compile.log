@@ -1,0 +1,8 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/c170095/Downloads/Source code/AM_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AM_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/c170095/Downloads/Source code/multA.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multA
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/c170095/Downloads/Source code/multB.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multB
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/c170095/Downloads/Source code/AM_top_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AM_top_tb

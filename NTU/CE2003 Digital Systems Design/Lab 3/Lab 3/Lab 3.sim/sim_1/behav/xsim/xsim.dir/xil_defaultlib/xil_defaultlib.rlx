@@ -1,0 +1,10 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/c170095/Downloads/Lab 3/Lab 3.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
+C:/Users/c170095/Downloads/Source code/AM_top.v,1615957607,verilog,,C:/Users/c170095/Downloads/Source code/multA.v,,AM_top,,,,,,,,
+C:/Users/c170095/Downloads/Source code/AM_top_tb.v,1611119621,verilog,,,,AM_top_tb,,,,,,,,
+C:/Users/c170095/Downloads/Source code/array_mult_6bit.v,1568260606,verilog,,C:/Users/c170095/Downloads/Source code/AM_top_tb.v,,array_mult_6bit,,,,,,,,
+,,,,C:/Users/c170095/Downloads/Source code/multB.v,,multA,,,,,,,,
+,,,,C:/Users/c170095/Downloads/Source code/AM_top_tb.v,,multB,,,,,,,,

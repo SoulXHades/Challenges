@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="AM_top_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="AM_top_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="77257700fs"></ZoomStartTime>
+      <ZoomEndTime time="134657701fs"></ZoomEndTime>
+      <Cursor1Time time="130000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="175"></NameColumnWidth>
+      <ValueColumnWidth column_width="146"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/AM_top_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/AM_top_tb/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/AM_top_tb/a" type="array">
+      <obj_property name="ElementShortName">a[5:0]</obj_property>
+      <obj_property name="ObjectShortName">a[5:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/AM_top_tb/b" type="array">
+      <obj_property name="ElementShortName">b[5:0]</obj_property>
+      <obj_property name="ObjectShortName">b[5:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/AM_top_tb/uut/a_r" type="array">
+      <obj_property name="ElementShortName">a_r[5:0]</obj_property>
+      <obj_property name="ObjectShortName">a_r[5:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/AM_top_tb/uut/b_r" type="array">
+      <obj_property name="ElementShortName">b_r[5:0]</obj_property>
+      <obj_property name="ObjectShortName">b_r[5:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/AM_top_tb/result" type="array">
+      <obj_property name="ElementShortName">result[11:0]</obj_property>
+      <obj_property name="ObjectShortName">result[11:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>

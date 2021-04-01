@@ -1,0 +1,16 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/stan179/Desktop/Lab4/Lab4.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sim_1/imports/provided files/uP16_top_tb.v,1611303800,verilog,,,,uP16_top_tb,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/Data_mem.v,1611305468,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/EX_Mem_PR.v,,D_mem,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/EX_Mem_PR.v,1389832646,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/EX_stage.v,,EX_Mem_PR,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/EX_stage.v,1411004912,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/ID_EX_PR.v,,ALU;EX_stage,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/ID_EX_PR.v,1410927732,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/ID_stage.v,,ID_EX_PR,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/ID_stage.v,1413771990,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/IF_ID_PR.v,,Control;ID_stage;Reg_File,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/IF_ID_PR.v,1389832406,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/IF_stage.v,,IF_ID_PR,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/IF_stage.v,1542946872,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/Instruct_mem.v,,IF_stage,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/Instruct_mem.v,1615645498,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/Mem_stage.v,,I_mem,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/Mem_stage.v,1611276428,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/uP16_top.v,,Mem_stage,,,,,,,,
+C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sources_1/imports/up16_src/uP16_top.v,1611303076,verilog,,C:/Users/stan179/Desktop/Lab4/Lab4.srcs/sim_1/imports/provided files/uP16_top_tb.v,,uP16_top,,,,,,,,

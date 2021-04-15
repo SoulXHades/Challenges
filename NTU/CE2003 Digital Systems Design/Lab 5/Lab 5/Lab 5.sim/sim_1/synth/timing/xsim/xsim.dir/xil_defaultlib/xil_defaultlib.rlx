@@ -1,0 +1,6 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/c170095/Downloads/Lab5/Lab5/Lab 5/Lab 5.sim/sim_1/synth/timing/xsim/uP16_top_tb_time_synth.v,1618293925,verilog,,C:/Users/c170095/Downloads/Lab5/Lab5/Source Codes/uP16_top_tb.v,,ALU;BRAM_SINGLE_MACRO__parameterized0;BRAM_SINGLE_MACRO_viv_;Control;D_mem;EX_Mem_PR;EX_stage;ID_EX_PR;ID_stage;IF_ID_PR;IF_stage;I_mem;Mem_WB_PR;Mem_stage;Reg_File;glbl;uP16_top,,,,,,,,
+C:/Users/c170095/Downloads/Lab5/Lab5/Source Codes/uP16_top_tb.v,1618289736,verilog,,,,uP16_top_tb,,,,,,,,

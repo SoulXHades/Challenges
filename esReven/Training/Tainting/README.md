@@ -93,3 +93,17 @@ In the cell below, write code to:
 3. Then, based on the results you see, skip results based on their location: you probably want to skip anything from `ntdll.dll`, and also skip functions that start with a `_` character in `msvcrt.dll`.
 
 Don't hesitate to ask for help.
+
+```Python
+import reven2  # noqa: F401
+from reven2.address import LinearAddress, LogicalAddress, LogicalAddressSegmentIndex, PhysicalAddress  # noqa: F401
+from reven2.arch import x64 as regs  # noqa: F401
+from reven2.preview.project_manager import ProjectManager
+
+# Let's connect first.
+pm = ProjectManager("http://reven:8880")
+server = pm.get_server_by(name="<your scenario name here>")
+trace = server.trace
+
+# See the cookbook and the above suggestions.
+```

@@ -1,5 +1,3 @@
-<img src='./images/eshard.png' style='width: 180px; float:right;'>
-
 # Guided exercise: taint playground
 
 ---
@@ -10,7 +8,6 @@
 
 ---
 
-<img src='./images/header.png' style='height: 200px; display: block; margin-left: auto; margin-right: auto;'>
 
 ## 1. Introduction
 
